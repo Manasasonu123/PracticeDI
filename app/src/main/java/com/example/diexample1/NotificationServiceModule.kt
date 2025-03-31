@@ -3,14 +3,16 @@ package com.example.diexample1
 import dagger.Module
 import dagger.Provides
 import jakarta.inject.Named
+import javax.inject.Singleton
 
 @Module
-class NotificationServiceModule {
+class NotificationServiceModule() {
 
+    @Singleton
     @MessageQualifier
     @Provides
-    fun getMessageService():NotificationService{
-        return MessageService()
+    fun getMessageService(retryCount:Int):NotificationService{
+        return MessageService(retryCount)
     }
 
     @Named("email")
